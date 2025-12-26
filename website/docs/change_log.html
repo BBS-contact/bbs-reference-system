@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Change Log</title>
+  <meta name="description" content="BBS Change Log — public reference record of updates to documents and reference pages (not an operational audit log)."/>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../assets/styles/bbs-theme.css"/>
+  <style>
+    main { padding: 46px 0 24px; }
+    .hero { text-align:center; }
+    .hero h1 { font-size:clamp(28px,5vw,52px); margin:0 0 12px; }
+    .hero p { max-width: 900px; margin: 0 auto; }
+    .entry { margin: 16px 0; }
+    .meta { color: var(--muted,#94a3b8); font-size: 13px; margin-bottom: 6px; }
+    .title { margin: 0 0 6px; font-weight: 700; }
+    ul { margin: 8px 0 0 18px; }
+    .notice { margin-top: 14px; }
+  </style>
+</head>
+
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Docs</span></div>
+      <nav class="top">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="manifesto.html" class="btn">Manifesto</a>
+        <a href="constitution_bbs.html" class="btn">Constitution</a>
+        <a href="legal.html" class="btn">Legal</a>
+        <a href="faq.html" class="btn">FAQ</a>
+        <a href="change_log.html" class="btn primary">Change Log</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1 class="gradient">Change Log</h1>
+      <p class="muted">
+        Public reference record of updates to documents and reference pages.
+        This is <strong>not</strong> an operational audit log, and it does not claim that enforcement systems are active.
+      </p>
+
+      <div class="panel notice">
+        <b>Status notice:</b>
+        Some mechanisms described across BBS documents are planned or under development.
+        When operational components are enabled, they will be introduced with explicit versioned releases.
+      </div>
+    </div>
+
+    <section style="margin-top:18px;">
+      <div class="panel entry">
+        <div class="meta">2025-12-26 · Reference publication update</div>
+        <p class="title">Docs alignment for reference model</p>
+        <ul class="muted">
+          <li>Unified navigation and styling across docs pages.</li>
+          <li>Clarified “development/testing” status language to avoid overclaiming.</li>
+          <li>Updated licensing wording to avoid conflicts and to respect repository license scope.</li>
+        </ul>
+      </div>
+
+      <div class="panel entry">
+        <div class="meta">Ongoing</div>
+        <p class="title">Planned future entries</p>
+        <ul class="muted">
+          <li>Public module status tags (L0–L3) per module.</li>
+          <li>Integrity publication milestones (when enabled): public proofs and verification instructions.</li>
+          <li>Release notes for any operational service (if/when published).</li>
+        </ul>
+      </div>
+
+      <div class="panel entry">
+        <div class="meta">Contact</div>
+        <p class="muted" style="margin:0;">
+          Questions: <strong>bbs.contactproton.me@proton.me</strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS — Big Begins Small | Reference publication</div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
