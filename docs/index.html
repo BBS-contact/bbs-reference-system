@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BBS — Big Begins Small</title>
+
+  <meta name="description" content="BBS — Big Begins Small. A public-interest system for clarity, integrity, and practical support — built step-by-step." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <meta property="og:title" content="BBS — Big Begins Small" />
+  <meta property="og:description" content="A public-interest system for clarity, integrity, and practical support — built step-by-step." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leonexus.org/" />
+
+  <link rel="canonical" href="https://leonexus.org/" />
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#0b1220;
+      --panel:#0f172a;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#1e293b;
+      --accent1:#10b981;
+      --accent2:#06b6d4;
+    }
+    body {
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans;
+      background: linear-gradient(#0b1220,#0a101c);
+      color:var(--text);
+    }
+    a { color: inherit; text-decoration:none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    header.sticky {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(11,18,32,0.65);
+      border-bottom: 1px solid var(--border);
+    }
+    nav.top {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      height:64px;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      font-family: "Montserrat", system-ui, sans-serif;
+    }
+    .pill {
+      width:36px;
+      height:36px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(16,185,129,.22), rgba(6,182,212,.18));
+      border:1px solid var(--border);
+    }
+
+    main {
+      padding: 64px 0 40px;
+      text-align:center;
+    }
+    h1.gradient {
+      font-family: "Montserrat", system-ui, sans-serif;
+      font-weight:700;
+      font-size: clamp(36px,5vw,64px);
+      line-height:1.08;
+      margin: 0 0 20px;
+      background: linear-gradient(90deg,#34d399,#22d3ee,#60a5fa);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+
+    .purpose {
+      max-width: 860px;
+      margin: 0 auto 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(15,23,42,0.6);
+      padding: 18px 22px;
+      text-align: left;
+    }
+    .purpose h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #ffffff;
+    }
+    .purpose p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .purpose ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .purpose li { margin: 6px 0; }
+    .purpose b { color: #ffffff; font-weight: 700; }
+
+    .cta-row {
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 18px 0 12px;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight:700;
+      border:1px solid var(--border);
+      background: rgba(15,23,42,0.55);
+      color: var(--text);
+      cursor:pointer;
+    }
+    .btn.primary {
+      border:0;
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#ffffff;
+    }
+    .btn:hover { border-color: rgba(96,165,250,0.35); }
+    .btn.primary:hover { opacity: 0.92; }
+
+    .statusline {
+      max-width: 860px;
+      margin: 10px auto 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      text-align: center;
+    }
+    .statusline b { color:#ffffff; }
+
+    footer {
+      border-top:1px solid var(--border);
+      padding: 22px 0;
+      margin-top: 40px;
+      color: var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+    footer .legal-links { margin-top: 10px; }
+    footer .legal-links a { margin: 0 8px; color: var(--muted); }
+    footer .legal-links a:hover { color:#ffffff; }
+
+    .fineprint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #7c8aa3;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="sticky">
+    <div class="container">
+      <nav class="top">
+        <div class="brand">
+          <div class="pill" aria-hidden="true"></div>
+          <span>BBS — Big Begins Small</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1 class="gradient">BBS — Big Begins Small</h1>
+
+     <div class="purpose">
+  <h2>Module Purpose</h2>
+
+  <p>
+    <span class="em">BBS is an open platform for citizens and public institutions.</span>
+    We make public processes understandable, document every decision, and remove conditions
+    that enable corruption and unnecessary bureaucracy.
+  </p>
+
+  <p>
+    Here you can find official documents and up-to-date development statuses of all modules —
+    from early prototypes to production-ready solutions.
+  </p>
+
+  <p>
+    <span class="em">BBS does not control people — it makes the system accountable to society.</span>
+  </p>
+</div>
+
+      <div class="cta-row">
+        <a href="projects/register/index.html" class="btn primary">Enter the System</a>
+      </div>
+
+      <div class="statusline">
+        <b>Status:</b> Legal framework published • Transparency documentation available • Operational modules under structured development (prototype/testing labels applied)
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 BBS – Better Balance System | <a href="mailto:bbs.contactproton.me@proton.me">Contact us</a></p>
+
+    <div class="legal-links">
+      <a href="docs/legal_statute_bbs.html">Statute</a> |
+      <a href="docs/constitution_bbs.html">Constitution</a> |
+      <a href="docs/privacy_policy.html">Privacy Policy</a> |
+      <a href="docs/terms_of_use.html">Terms of Use</a> |
+      <a href="docs/ai_policy.html">AI Policy</a> |
+      <a href="docs/copyright.html">Copyright</a> |
+      <a href="docs/legal.html">Legal</a> |
+      <a href="docs/faq.html">FAQ</a> |
+      <a href="docs/transparency.html">Transparency</a>
+    </div>
+
+    <div class="fineprint">
+      Information page. No legal or medical advice. Public releases are published with explicit status.
+    </div>
+  </footer>
+</body>
+</html>
+
