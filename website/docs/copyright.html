@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Copyright & Licensing Notice</title>
+  <meta name="description" content="Copyright and licensing notice of BBS — MIT repository scope, attribution, and disclosure boundary."/>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../assets/styles/bbs-theme.css"/>
+  <style>
+    .hero { text-align:center; padding:50px 20px; }
+    .hero h1 { font-size:clamp(26px,5vw,46px); margin-bottom:16px; }
+    section { margin:30px 0; }
+    h2 { margin-bottom:8px; }
+    ul { margin:10px 0 10px 20px; }
+    .notice { margin-top:14px; }
+  </style>
+</head>
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Docs</span></div>
+      <nav class="top">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="manifesto.html" class="btn">Manifesto</a>
+        <a href="constitution_bbs.html" class="btn">Constitution</a>
+        <a href="legal.html" class="btn">Legal</a>
+        <a href="faq.html" class="btn">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container hero">
+    <h1 class="gradient">Copyright & Licensing Notice</h1>
+    <p class="muted">Clear rules for use of BBS reference materials.</p>
+
+    <div class="panel notice">
+      <b>Status notice:</b>
+      This repository is a reference model. It is published for transparency of direction and architecture.
+      Core operational implementations and proprietary mechanisms are intentionally not disclosed here.
+    </div>
+  </main>
+
+  <section class="container">
+
+    <div class="panel">
+      <h2>1. Repository License</h2>
+      <p>
+        Unless otherwise specified in a file or module, the contents of this repository are provided under the repository’s
+        published open-source license (for example, MIT).
+      </p>
+      <p>
+        Where a file or module contains a different license notice, that notice takes precedence for that specific component.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>2. Attribution</h2>
+      <p>
+        If you reuse or redistribute this repository’s materials under the applicable license, keep attribution and license text intact.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>3. Disclosure Boundary</h2>
+      <p>
+        This repository intentionally does not include core algorithmic logic, enforcement mechanisms, private security methods,
+        or operational backend services. Those elements are developed and tested separately.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>4. AI Systems</h2>
+      <p>
+        AI governance principles are described in the <a href="ai_policy.html">AI Policy</a>.
+        This repository does not disclose operational AI implementations, training data, private prompts, or security-sensitive logic.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>5. Reporting</h2>
+      <p>
+        If you believe your rights have been infringed or you have a licensing question, contact:
+        <strong>bbs.contactproton.me@proton.me</strong>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>6. Updates</h2>
+      <p>
+        Changes to this notice will be recorded in the <a href="change_log.html">Change Log</a>.
+      </p>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS — Big Begins Small</div>
+  </footer>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
