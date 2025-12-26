@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Terms of Use</title>
+  <meta name="description" content="BBS Terms of Use — rules for use, responsibilities, and limitations (reference publication)."/>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../assets/styles/bbs-theme.css"/>
+  <style>
+    .hero { text-align:center; padding:50px 20px; }
+    .hero h1 { font-size:clamp(26px,5vw,46px); margin-bottom:16px; }
+    section { margin:30px 0; }
+    h2 { margin-bottom:8px; }
+    ul { margin:10px 0 10px 20px; }
+    .notice { margin-top:14px; }
+  </style>
+</head>
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Docs</span></div>
+      <nav class="top">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="manifesto.html" class="btn">Manifesto</a>
+        <a href="constitution_bbs.html" class="btn">Constitution</a>
+        <a href="legal.html" class="btn">Legal</a>
+        <a href="faq.html" class="btn">FAQ</a>
+        <a href="change_log.html" class="btn">Change Log</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container hero">
+    <h1 class="gradient">Terms of Use</h1>
+    <p class="muted">Reference publication. These terms describe intended rules for using BBS services.</p>
+
+    <div class="panel notice">
+      <b>Status notice:</b>
+      This repository is not an operational platform. When services go live, service-specific terms may be published with explicit versions.
+    </div>
+  </main>
+
+  <section class="container">
+    <div class="panel">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing BBS reference pages or future BBS services, you agree to comply with these terms. If you do not agree, do not use the services.</p>
+    </div>
+
+    <div class="panel">
+      <h2>2. Intellectual Property and Licensing</h2>
+      <p>
+        The BBS initiative may publish materials under different licenses depending on the component.
+        For the public reference repository, the repository license applies where stated.
+        Operational backend services, security methods, and private implementations may be developed separately and not publicly disclosed.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>3. User Responsibilities</h2>
+      <ul>
+        <li>Use the system ethically</li>
+        <li>Do not misuse the platform for illegal or harmful purposes</li>
+        <li>Respect rights and privacy of others</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>4. Limitation of Liability</h2>
+      <p>BBS reference materials are provided “as is.” No warranties are provided. Do not treat reference pages as legal, medical, or financial advice.</p>
+    </div>
+
+    <div class="panel">
+      <h2>5. Changes</h2>
+      <p>These terms may be updated. Public updates are recorded in the <a href="change_log.html">Change Log</a>.</p>
+    </div>
+
+    <div class="panel">
+      <h2>6. Contact</h2>
+      <p>Questions: <strong>bbs.contactproton.me@proton.me</strong></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS — Big Begins Small | Reference publication</div>
+  </footer>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
