@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Access Portal</title>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../../assets/styles/bbs-theme.css"/>
+
+  <style>
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+    .card{background:#0b1220;border:1px solid #1f2a44;border-radius:12px;padding:16px;cursor:pointer;transition:transform .15s ease}
+    .card:hover{transform:translateY(-2px)}
+    .card h2{margin:0 0 6px}
+    .card p{margin:0;color:var(--muted,#94a3b8);line-height:1.5}
+    .badge{display:inline-block;margin-top:10px;border:1px solid #1f2a44;border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted,#94a3b8)}
+    .note{margin-top:10px;color:var(--muted,#94a3b8);font-size:13px;line-height:1.6}
+
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);align-items:center;justify-content:center;z-index:50;padding:16px}
+    .box{background:#0f172a;border:1px solid #1f2a44;border-radius:14px;padding:18px;width:100%;max-width:520px}
+    .box h3{margin:0 0 8px}
+    .box .muted{color:var(--muted,#94a3b8);margin:0 0 12px;line-height:1.5}
+    .box .input{width:100%;margin-top:10px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .row .btn{flex:1}
+
+    .divider{height:1px;background:#1f2a44;margin:14px 0}
+    .kvs{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin-top:10px;font-size:13px;color:var(--muted,#94a3b8)}
+    .kvs b{color:#e5e7eb;font-weight:700}
+
+    .error{display:none;margin-top:12px;border:1px solid #7f1d1d;background:rgba(127,29,29,.12);color:#fecaca;border-radius:12px;padding:10px;font-size:13px;line-height:1.5}
+    .ok{display:none;margin-top:12px;border:1px solid #14532d;background:rgba(20,83,45,.12);color:#bbf7d0;border-radius:12px;padding:10px;font-size:13px;line-height:1.5}
+
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hint{margin:8px 0 0;font-size:12px;color:var(--muted,#94a3b8);line-height:1.5}
+  </style>
+</head>
+
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Access</span></div>
+    </div>
+  </header>
+
+  <main class="container" style="padding:20px;">
+    <h1 class="gradient">Access Portal</h1>
+    <p class="muted">Choose an access path. BBS is built for everyone: citizens and public institutions.</p>
+
+    <p class="note">
+      Access is governed by policy. Every access attempt is recorded for integrity and security.
+      Logs are append-only in production and visible only to authorized auditors under mandate.
+    </p>
+
+    <div class="grid" role="navigation" aria-label="Access tiers">
+      <div class="card" onclick="openModal('public')">
+        <h2>Public Access</h2>
+        <p>Open entry. Read public documentation, system status, and published records.</p>
+        <span class="badge">Free</span>
+      </div>
+
+      <div class="card" onclick="openModal('verified')">
+        <h2>Verified Access</h2>
+        <p>For citizens and organizations who want to use services and submit requests with verified identity.</p>
+        <span class="badge">Conditionally free</span>
+      </div>
+
+      <div class="card" onclick="openModal('restricted')">
+        <h2>Restricted Access</h2>
+        <p>For staff, developers, administrators, and authorized institutional roles.</p>
+        <span class="badge">Closed system</span>
+      </div>
+
+      <div class="card" onclick="openModal('classified')">
+        <h2>Classified Access</h2>
+        <p>For authorized personnel with formal clearance and signed mandates. All actions are audited.</p>
+        <span class="badge">Classified</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Public -->
+  <div id="modal-public" class="modal" aria-hidden="true">
+    <div class="box">
+      <h3>Public Access</h3>
+      <p class="muted">No registration required. You can browse published BBS documentation and transparency materials.</p>
+
+      <div class="kvs">
+        <div><b>Includes</b></div><div>Public pages, legal texts, transparency records, module status.</div>
+        <div><b>Does not include</b></div><div>Personal services, internal panels, restricted modules.</div>
+      </div>
+
+      <div class="row">
+        <a class="btn primary" href="../../index.html" onclick="logAccess('continue_public', 'public', 'home', 'informational')">Continue</a>
+        <button class="btn" onclick="closeModals()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Verified -->
+  <div id="modal-verified" class="modal" aria-hidden="true">
+    <div class="box">
+      <h3>Verified Access</h3>
+      <p class="muted">For citizens and institutions who want to use services under verified identity. Status is assigned after basic verification.</p>
+
+      <input id="ver-name" class="input" placeholder="Full name / Organization representative name"/>
+      <input id="ver-email" class="input" placeholder="Email"/>
+      <input id="ver-id" class="input" placeholder="Optional: National ID / Organization ID (if applicable)"/>
+
+      <div class="divider"></div>
+
+      <div class="kvs">
+        <div><b>Rule</b></div><div>Email verification + acceptance of legal terms (server-side).</div>
+        <div><b>Access</b></div><div>Service requests, participation flows, verified submissions.</div>
+      </div>
+
+      <div id="ver-error" class="error"></div>
+      <div id="ver-ok" class="ok"></div>
+
+      <div class="row">
+        <button class="btn primary" onclick="submitRequest('verified')">Request Verified Access</button>
+        <button class="btn" onclick="closeModals()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Restricted -->
+  <div id="modal-restricted" class="modal" aria-hidden="true">
+    <div class="box">
+      <h3>Restricted Access</h3>
+      <p class="muted">For staff, developers, administrators, and authorized institutional roles. Requires an invitation identifier.</p>
+
+      <input id="res-name" class="input" placeholder="Full name"/>
+      <input id="res-email" class="input" placeholder="Work email"/>
+      <input id="res-role" class="input" placeholder="Role (developer / admin / institution officer)"/>
+      <input id="res-invite" class="input" placeholder="Invitation ID"/>
+      <p class="hint">Invitation format example: <span class="mono">BBS-INV-DEV-XXXXX</span> (also: ADM, GOV, AUD, OPS)</p>
+
+      <select id="res-purpose" class="input" aria-label="Declared purpose">
+        <option value="" selected disabled>Declared purpose (required)</option>
+        <option value="development">Development / maintenance</option>
+        <option value="administrative">Administrative work</option>
+        <option value="audit">Audit / oversight</option>
+        <option value="incident_response">Security / incident response</option>
+        <option value="support">Support / operations</option>
+      </select>
+
+      <div class="divider"></div>
+
+      <div class="kvs">
+        <div><b>Rule</b></div><div>Invitation ID + approval + audit policy (server-side).</div>
+        <div><b>Access</b></div><div>Internal modules, admin panels, API sandbox (as assigned).</div>
+      </div>
+
+      <div id="res-error" class="error"></div>
+      <div id="res-ok" class="ok"></div>
+
+      <div class="row">
+        <button class="btn primary" onclick="submitRequest('restricted')">Request Restricted Access</button>
+        <button class="btn" onclick="closeModals()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Classified -->
+  <div id="modal-classified" class="modal" aria-hidden="true">
+    <div class="box">
+      <h3>Classified Access</h3>
+      <p class="muted">For authorized personnel with formal clearance. All actions are logged and require legal mandate.</p>
+
+      <input id="cla-name" class="input" placeholder="Full name"/>
+      <input id="cla-email" class="input" placeholder="Official email"/>
+      <input id="cla-unit" class="input" placeholder="Institution / Unit"/>
+
+      <input id="cla-clearance" class="input" placeholder="Clearance level code"/>
+      <p class="hint">Clearance format example: <span class="mono">BBS-CLR-L3-XXXXX</span> (level depends on mandate)</p>
+
+      <input id="cla-token" class="input" placeholder="Authorization token"/>
+      <p class="hint">Authorization format example: <span class="mono">BBS-AUTH-CLA-XXXXX</span></p>
+
+      <select id="cla-purpose" class="input" aria-label="Declared purpose">
+        <option value="" selected disabled>Declared purpose (required)</option>
+        <option value="administrative">Administrative action</option>
+        <option value="audit">Audit / oversight</option>
+        <option value="incident_response">Security / incident response</option>
+        <option value="legal_mandate">Legal mandate execution</option>
+        <option value="emergency">Emergency operations</option>
+      </select>
+
+      <input id="cla-mandate" class="input" placeholder="Mandate reference (optional)"/>
+
+      <div class="divider"></div>
+
+      <div class="kvs">
+        <div><b>Rule</b></div><div>Formal clearance + signed mandate + hardware key (planned) + full audit.</div>
+        <div><b>Access</b></div><div>Classified modules (only where legally permitted and technically enforced).</div>
+      </div>
+
+      <div id="cla-error" class="error"></div>
+      <div id="cla-ok" class="ok"></div>
+
+      <div class="row">
+        <button class="btn primary" onclick="submitRequest('classified')">Request Classified Access</button>
+        <button class="btn" onclick="closeModals()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var ACCESS_LOG_KEY = "bbs_access_log_demo_v1";
+    var ACCESS_LOG_LIMIT = 200;
+
+    function nowIso(){
+      return new Date().toISOString();
+    }
+
+    function safeJsonParse(s){
+      try{ return JSON.parse(s); }catch(e){ return null; }
+    }
+
+    function loadAccessLog(){
+      var raw = null;
+      try{ raw = localStorage.getItem(ACCESS_LOG_KEY); }catch(e){ raw = null; }
+      var parsed = raw ? safeJsonParse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    }
+
+    function saveAccessLog(items){
+      var clipped = items.slice(-ACCESS_LOG_LIMIT);
+      try{ localStorage.setItem(ACCESS_LOG_KEY, JSON.stringify(clipped)); }catch(e){}
+    }
+
+    function addAccessEvent(evt){
+      var items = loadAccessLog();
+      items.push(evt);
+      saveAccessLog(items);
+    }
+
+    function logAccess(action, tier, moduleName, declaredPurpose){
+      addAccessEvent({
+        event: "access",
+        timestamp: nowIso(),
+        actor: "anonymous",
+        access_tier: tier || "unknown",
+        module: moduleName || "register",
+        action: action || "event",
+        declared_purpose: declaredPurpose || null,
+        immutable: true
+      });
+    }
+
+    function openModal(kind){
+      closeModals();
+      var el = document.getElementById("modal-" + kind);
+      if (el) el.style.display = "flex";
+      logAccess("open_access_tier", kind, "register", "informational");
+    }
+
+    function closeModals(){
+      document.querySelectorAll(".modal").forEach(function(m){
+        m.style.display = "none";
+      });
+      clearMessages();
+    }
+
+    function clearMessages(){
+      ["ver","res","cla"].forEach(function(prefix){
+        var e = document.getElementById(prefix + "-error");
+        var o = document.getElementById(prefix + "-ok");
+        if (e){ e.style.display = "none"; e.textContent = ""; }
+        if (o){ o.style.display = "none"; o.textContent = ""; }
+      });
+    }
+
+    function isEmail(s){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || "").trim());
+    }
+
+    function submitRequest(kind){
+      clearMessages();
+
+      if (kind === "verified"){
+        var name = document.getElementById("ver-name").value.trim();
+        var email = document.getElementById("ver-email").value.trim();
+        var err = document.getElementById("ver-error");
+        var ok = document.getElementById("ver-ok");
+
+        if (!name || name.length < 2){
+          err.textContent = "Please enter your name (or representative name).";
+          err.style.display = "block";
+          logAccess("request_rejected", "verified", "register", "missing_name");
+          return;
+        }
+        if (!isEmail(email)){
+          err.textContent = "Please enter a valid email address.";
+          err.style.display = "block";
+          logAccess("request_rejected", "verified", "register", "invalid_email");
+          return;
+        }
+
+        logAccess("request_submitted", "verified", "register", "service_request");
+        ok.textContent = "Request recorded (demo). In production, email verification and policy checks will apply.";
+        ok.style.display = "block";
+        return;
+      }
+
+      if (kind === "restricted"){
+        var rName = document.getElementById("res-name").value.trim();
+        var rEmail = document.getElementById("res-email").value.trim();
+        var rRole = document.getElementById("res-role").value.trim();
+        var rInvite = document.getElementById("res-invite").value.trim();
+        var rPurpose = document.getElementById("res-purpose").value;
+        var rErr = document.getElementById("res-error");
+        var rOk = document.getElementById("res-ok");
+
+        if (!rName || rName.length < 2){
+          rErr.textContent = "Please enter your full name.";
+          rErr.style.display = "block";
+          logAccess("request_rejected", "restricted", "register", "missing_name");
+          return;
+        }
+        if (!isEmail(rEmail)){
+          rErr.textContent = "Please enter a valid work email.";
+          rErr.style.display = "block";
+          logAccess("request_rejected", "restricted", "register", "invalid_email");
+          return;
+        }
+        if (!rRole){
+          rErr.textContent = "Please specify the role you request.";
+          rErr.style.display = "block";
+          logAccess("request_rejected", "restricted", "register", "missing_role");
+          return;
+        }
+        if (!rInvite || rInvite.length < 6){
+          rErr.textContent = "Invitation ID is required for Restricted Access.";
+          rErr.style.display = "block";
+          logAccess("request_rejected", "restricted", "register", "missing_invitation");
+          return;
+        }
+        if (!rPurpose){
+          rErr.textContent = "Declared purpose is required for Restricted Access.";
+          rErr.style.display = "block";
+          logAccess("request_rejected", "restricted", "register", "missing_purpose");
+          return;
+        }
+
+        logAccess("request_submitted", "restricted", "register", rPurpose);
+        rOk.textContent = "Request recorded (demo). In production, invitation validation, approval, and auditing will apply.";
+        rOk.style.display = "block";
+        return;
+      }
+
+      if (kind === "classified"){
+        var cName = document.getElementById("cla-name").value.trim();
+        var cEmail = document.getElementById("cla-email").value.trim();
+        var cUnit = document.getElementById("cla-unit").value.trim();
+        var cClr = document.getElementById("cla-clearance").value.trim();
+        var cTok = document.getElementById("cla-token").value.trim();
+        var cPurpose = document.getElementById("cla-purpose").value;
+        var cErr = document.getElementById("cla-error");
+        var cOk = document.getElementById("cla-ok");
+
+        if (!cName || cName.length < 2){
+          cErr.textContent = "Please enter your full name.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "missing_name");
+          return;
+        }
+        if (!isEmail(cEmail)){
+          cErr.textContent = "Please enter a valid official email.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "invalid_email");
+          return;
+        }
+        if (!cUnit){
+          cErr.textContent = "Institution / Unit is required.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "missing_unit");
+          return;
+        }
+        if (!cClr || cClr.length < 4){
+          cErr.textContent = "Clearance level code is required.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "missing_clearance");
+          return;
+        }
+        if (!cTok || cTok.length < 8){
+          cErr.textContent = "Authorization token is required for Classified Access.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "missing_token");
+          return;
+        }
+        if (!cPurpose){
+          cErr.textContent = "Declared purpose is required for Classified Access.";
+          cErr.style.display = "block";
+          logAccess("request_rejected", "classified", "register", "missing_purpose");
+          return;
+        }
+
+        logAccess("request_submitted", "classified", "register", cPurpose);
+        cOk.textContent = "Request recorded (demo). In production, legal mandate, clearance checks, and full audit enforcement will apply.";
+        cOk.style.display = "block";
+        return;
+      }
+    }
+  </script>
+</body>
+</html>
