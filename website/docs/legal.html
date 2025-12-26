@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Legal</title>
+  <meta name="description" content="Legal status and documents of BBS — transparency, rules, and ethical policies (reference publication)."/>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../assets/styles/bbs-theme.css"/>
+  <style>
+    .hero { text-align:center; padding:50px 20px; }
+    .hero h1 { font-size:clamp(26px,5vw,46px); margin-bottom:16px; }
+    section { margin:30px 0; }
+    h2 { margin-bottom:8px; }
+    ul { margin:10px 0 10px 20px; }
+    .notice { margin-top:14px; }
+  </style>
+</head>
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Docs</span></div>
+      <nav class="top">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="manifesto.html" class="btn">Manifesto</a>
+        <a href="constitution_bbs.html" class="btn">Constitution</a>
+        <a href="legal.html" class="btn primary">Legal</a>
+        <a href="faq.html" class="btn">FAQ</a>
+        <a href="change_log.html" class="btn">Change Log</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container hero">
+    <h1 class="gradient">Legal Status of BBS</h1>
+    <p class="muted">Reference publication. Legal and ethical framework documents of BBS.</p>
+
+    <div class="panel notice">
+      <b>Status notice:</b>
+      BBS is in development and documentation may evolve. Operational enforcement depends on future releases.
+    </div>
+  </main>
+
+  <section class="container">
+    <div class="panel">
+      <h2>1. Mission and Ethics</h2>
+      <p>
+        BBS is built as a public-interest initiative focused on truth, dignity, transparency, and non-coercion.
+        The system is designed to reduce corruption vectors and improve accountability while protecting personal privacy.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>2. Legal Documents</h2>
+      <ul>
+        <li><a href="legal_statute_bbs.html">Legal Statute</a></li>
+        <li><a href="constitution_bbs.html">Constitution of BBS</a></li>
+        <li><a href="privacy_policy.html">Privacy Policy</a></li>
+        <li><a href="terms_of_use.html">Terms of Use</a></li>
+        <li><a href="ai_policy.html">AI Policy</a></li>
+        <li><a href="copyright.html">Copyright & Licensing Notice</a></li>
+        <li><span class="muted">Security Principles (planned)</span></li>
+      </ul>
+      <p class="muted">
+        Documents may be updated as the system evolves. Public updates are recorded in the <a href="change_log.html">Change Log</a>.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS — Big Begins Small | Reference publication</div>
+  </footer>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
