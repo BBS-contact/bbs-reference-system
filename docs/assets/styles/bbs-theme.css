@@ -1,0 +1,264 @@
+/* ===========================
+   BBS THEME (Emerald + Cyan)
+   Універсальний стиль – FIXED HEADER COLORS & CENTERING
+   =========================== */
+
+:root {
+  --bg-gradient: linear-gradient(#0b1220, #0a101c);
+
+  /* Акцентні кольори */
+  --color-accent: #10b981;       /* Emerald green */
+  --color-accent2: #06b6d4;      /* Cyan */
+  --color-accent-hover: #22d3ee; /* Lighter cyan for hover */
+
+  --color-text: #e5e7eb;
+  --color-muted: #94a3b8;
+  --color-panel-bg: rgba(15, 23, 42, 0.6);
+  --color-border: #1e293b;
+
+  --radius: 16px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --font-main: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--bg-gradient);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Контейнер */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px; /* збільшили відступи з боків */
+}
+
+/* === ШАПКА (оригінал) === */
+header.sticky {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(11,18,32,.6);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 10;
+}
+.header-inner {               /* нова обгортка всередині header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+nav.top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #fff; /* білий як у твоєму шаблоні */
+}
+.pill {
+  background: linear-gradient(135deg, rgba(16,185,129,.2), rgba(6,182,212,.2));
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+}
+.menu {
+  display: none;
+  gap: 18px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.menu a:hover { color: #fff; }
+
+/* Посилання у верхньому меню праворуч */
+nav.top a {
+  color: #fff;                 /* завжди білі */
+  font-size: 14px;
+}
+nav.top a:hover {
+  color: var(--color-accent2); /* бірюзовий hover */
+}
+
+/* Дії (кнопки праворуч) */
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #fff;
+}
+
+/* Кнопки */
+.btn {
+  border: 1px solid rgba(16,185,129,.4);
+  background: transparent;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+.btn:hover { background: rgba(16,185,129,0.1); }
+.btn.primary {
+  border: 0;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent2));
+  color: #fff;
+}
+.btn.primary:hover {
+  background: linear-gradient(90deg, var(--color-accent-hover), var(--color-accent2));
+}
+.tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border: 1px solid rgba(6,182,212,.4);
+  border-radius: 999px;
+  color: #d1fae5;
+}
+
+/* Hero */
+section { padding: 36px 0; }
+.hero { padding: 56px 0 24px; }
+.hero-grid { display: grid; gap: 24px; }
+h1.gradient {
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.15;
+  background: linear-gradient(90deg, #34d399, #22d3ee, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Панелі */
+.panel {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* KPI */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+.kpi {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: rgba(16,185,129,0.06);
+}
+
+/* Сітки */
+.grid-3, .grid-2 { display: grid; gap: 16px; }
+.grid-3 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.grid-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+
+/* Features */
+.feature {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 16px;
+  background: var(--color-panel-bg);
+}
+.feature h3 { margin: 0 0 6px; font-size: 18px; }
+
+/* Текст */
+.muted { color: var(--color-muted); }
+
+/* Інпути */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: #0b1220;
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--color-border);
+  padding: 32px 0;
+  margin-top: 24px;
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Центрування для hero */
+.hero {
+  text-align: center;
+}
+
+/* Центрування для кнопок у секції actions */
+.actions {
+  text-align: center;
+}
+
+/* Якщо потрібно центрувати панелі */
+.panel.center {
+  text-align: center;
+}
+
+/* Центрування кнопок у блоках дій */
+.actions {
+  justify-content: center; /* вирівнювання по центру у flex-контейнері */
+}
+/* ===== MODAL WINDOWS ===== */
+.modal {
+  display: none;                /* сховане за замовчуванням */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);  /* затемнення фону */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal .box {
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+  text-align: center;           /* центруємо текст і кнопку */
+}
+
+.modal .box h3 {
+  margin-bottom: 16px;
+}
+
+.modal .box input,
+.modal .box select {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #0b1220;
+  color: #fff;
+}
+
+/* Центрування блоків з ролями */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  justify-items: center;   /* центрує картки всередині */
+}
