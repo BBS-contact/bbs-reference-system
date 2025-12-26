@@ -33,6 +33,7 @@
 
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
     .hint{margin:8px 0 0;font-size:12px;color:var(--muted,#94a3b8);line-height:1.5}
+    .warn{margin-top:10px;border:1px solid #7c2d12;background:rgba(124,45,18,.12);color:#fed7aa;border-radius:12px;padding:10px;font-size:13px;line-height:1.55}
   </style>
 </head>
 
@@ -48,9 +49,13 @@
     <p class="muted">Choose an access path. BBS is built for everyone: citizens and public institutions.</p>
 
     <p class="note">
-      Access is governed by policy. Every access attempt is recorded for integrity and security.
-      Logs are append-only in production and visible only to authorized auditors under mandate.
+      Access is governed by policy. In this demo, access events are stored locally in your browser (illustration only).
+      In production, logging and enforcement are planned to be server-side and append-only, available only to authorized auditors under mandate.
     </p>
+
+    <div class="warn">
+      Demo notice: do not enter real national IDs, clearance codes, or confidential tokens. Use placeholders.
+    </div>
 
     <div class="grid" role="navigation" aria-label="Access tiers">
       <div class="card" onclick="openModal('public')">
@@ -80,7 +85,7 @@
   </main>
 
   <!-- Modal: Public -->
-  <div id="modal-public" class="modal" aria-hidden="true">
+  <div id="modal-public" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="box">
       <h3>Public Access</h3>
       <p class="muted">No registration required. You can browse published BBS documentation and transparency materials.</p>
@@ -98,14 +103,14 @@
   </div>
 
   <!-- Modal: Verified -->
-  <div id="modal-verified" class="modal" aria-hidden="true">
+  <div id="modal-verified" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="box">
       <h3>Verified Access</h3>
       <p class="muted">For citizens and institutions who want to use services under verified identity. Status is assigned after basic verification.</p>
 
       <input id="ver-name" class="input" placeholder="Full name / Organization representative name"/>
       <input id="ver-email" class="input" placeholder="Email"/>
-      <input id="ver-id" class="input" placeholder="Optional: National ID / Organization ID (if applicable)"/>
+      <input id="ver-id" class="input" placeholder="Optional: National ID / Organization ID (demo placeholders only)"/>
 
       <div class="divider"></div>
 
@@ -125,7 +130,7 @@
   </div>
 
   <!-- Modal: Restricted -->
-  <div id="modal-restricted" class="modal" aria-hidden="true">
+  <div id="modal-restricted" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="box">
       <h3>Restricted Access</h3>
       <p class="muted">For staff, developers, administrators, and authorized institutional roles. Requires an invitation identifier.</p>
@@ -163,7 +168,7 @@
   </div>
 
   <!-- Modal: Classified -->
-  <div id="modal-classified" class="modal" aria-hidden="true">
+  <div id="modal-classified" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="box">
       <h3>Classified Access</h3>
       <p class="muted">For authorized personnel with formal clearance. All actions are logged and require legal mandate.</p>
@@ -172,10 +177,10 @@
       <input id="cla-email" class="input" placeholder="Official email"/>
       <input id="cla-unit" class="input" placeholder="Institution / Unit"/>
 
-      <input id="cla-clearance" class="input" placeholder="Clearance level code"/>
+      <input id="cla-clearance" class="input" placeholder="Clearance level code (demo placeholders only)"/>
       <p class="hint">Clearance format example: <span class="mono">BBS-CLR-L3-XXXXX</span> (level depends on mandate)</p>
 
-      <input id="cla-token" class="input" placeholder="Authorization token"/>
+      <input id="cla-token" class="input" placeholder="Authorization token (demo placeholders only)"/>
       <p class="hint">Authorization format example: <span class="mono">BBS-AUTH-CLA-XXXXX</span></p>
 
       <select id="cla-purpose" class="input" aria-label="Declared purpose">
@@ -251,20 +256,24 @@
         module: moduleName || "register",
         action: action || "event",
         declared_purpose: declaredPurpose || null,
-        immutable: true
+        integrity_mode: "demo_local"
       });
     }
 
     function openModal(kind){
       closeModals();
       var el = document.getElementById("modal-" + kind);
-      if (el) el.style.display = "flex";
+      if (el){
+        el.style.display = "flex";
+        el.setAttribute("aria-hidden", "false");
+      }
       logAccess("open_access_tier", kind, "register", "informational");
     }
 
     function closeModals(){
       document.querySelectorAll(".modal").forEach(function(m){
         m.style.display = "none";
+        m.setAttribute("aria-hidden", "true");
       });
       clearMessages();
     }
@@ -409,6 +418,16 @@
         return;
       }
     }
+
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape") closeModals();
+    });
+
+    document.querySelectorAll(".modal").forEach(function(m){
+      m.addEventListener("click", function(e){
+        if (e.target === m) closeModals();
+      });
+    });
   </script>
 </body>
 </html>
