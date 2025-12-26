@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>BBS — Manifesto</title>
+  <meta name="description" content="BBS Manifesto — a reference publication describing principles, intent, and direction of the BBS project (development draft)."/>
+  <link rel="icon" href="/img/favicon.ico"/>
+  <link rel="stylesheet" href="../assets/styles/bbs-theme.css"/>
+  <style>
+    main { padding: 46px 0 24px; }
+    .hero { text-align:center; }
+    .hero h1 { font-size:clamp(28px,5vw,52px); margin:0 0 12px; }
+    .hero p { max-width: 860px; margin: 0 auto; }
+    section { margin: 26px 0; }
+    .lead { font-size: 16px; line-height: 1.7; }
+    .quote { margin: 14px 0; padding: 12px 14px; border-left: 3px solid rgba(34,211,238,.6); background: rgba(15,23,42,.55); border-radius: 10px; }
+    .meta { margin-top: 12px; }
+    .meta .tag { margin-left: 8px; }
+  </style>
+</head>
+
+<body>
+  <header class="sticky">
+    <div class="container header-inner">
+      <div class="brand"><span>BBS</span><span class="tag">Docs</span></div>
+      <nav class="top">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="manifesto.html" class="btn primary">Manifesto</a>
+        <a href="constitution_bbs.html" class="btn">Constitution</a>
+        <a href="legal.html" class="btn">Legal</a>
+        <a href="faq.html" class="btn">FAQ</a>
+        <a href="change_log.html" class="btn">Change Log</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1 class="gradient">Manifesto</h1>
+      <p class="muted lead">
+        Reference publication (development draft). This text describes the ethical direction and intent of BBS.
+        Operational implementations and enforcement mechanisms are developed separately.
+      </p>
+      <div class="meta muted">
+        Status: Development & Testing Phase <span class="tag">Reference</span>
+      </div>
+    </div>
+
+    <section>
+      <div class="panel">
+        <h2>Why BBS</h2>
+        <p class="muted lead">
+          BBS (Big Begins Small) exists to make public systems understandable, verifiable, and accountable to society.
+          The platform is built step-by-step with a focus on truth, dignity, and transparency — without coercion.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <h2>Core compass</h2>
+        <ul class="muted">
+          <li>Truth over form.</li>
+          <li>Person over system.</li>
+          <li>Freedom from manipulation.</li>
+          <li>Responsibility over fear.</li>
+          <li>Love without coercion.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <h2>Statement</h2>
+        <div class="quote">
+          <p class="muted" style="margin:0; line-height:1.7;">
+            All change begins with a thought. A thought becomes a word, a word leads to action, and action shapes a new reality.
+            BBS is being created as a system that belongs to the people. It is a space of open data, transparent decisions,
+            and a future where everyone has a voice and can act.
+            We believe that real change is born from awareness, not conflict. It comes through action, not ideology.
+            Step by step, we are building a world where the future is open to all.
+          </p>
+        </div>
+        <p class="muted" style="margin:10px 0 0;">
+          This manifesto may evolve as the project develops. Updates are recorded in the <a href="change_log.html">Change Log</a>.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <h2>Contact</h2>
+        <p class="muted">
+          Questions or proposals: <strong>bbs.contactproton.me@proton.me</strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> BBS — Big Begins Small | Reference publication</div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
